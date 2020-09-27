@@ -1,22 +1,23 @@
 env:
   - VERSION=20.3.7.46
-  - VERSION=19.16.17.80
-  - VERSION=19.15.3.6
-  - VERSION=19.9.2.4   # allow_suspicious_low_cardinality_types
-  - VERSION=19.8.3.8   # SimpleAggregateFunction
-  - VERSION=19.3.3
-  - VERSION=18.12.17
-  - VERSION=18.12.13
-  - VERSION=18.10.3
-  - VERSION=18.6.0
-  - VERSION=18.5.1
-  - VERSION=18.4.0
-  - VERSION=18.1.0
-  - VERSION=1.1.54394
-  - VERSION=1.1.54390
-  - VERSION=1.1.54388
-  - VERSION=1.1.54385
-  - VERSION=1.1.54383
+  - VERSION=20.3.7.46 USE_NUMPY=1
+#  - VERSION=19.16.17.80
+#  - VERSION=19.15.3.6
+#  - VERSION=19.9.2.4   # allow_suspicious_low_cardinality_types
+#  - VERSION=19.8.3.8   # SimpleAggregateFunction
+#  - VERSION=19.3.3
+#  - VERSION=18.12.17
+#  - VERSION=18.12.13
+#  - VERSION=18.10.3
+#  - VERSION=18.6.0
+#  - VERSION=18.5.1
+#  - VERSION=18.4.0
+#  - VERSION=18.1.0
+#  - VERSION=1.1.54394
+#  - VERSION=1.1.54390
+#  - VERSION=1.1.54388
+#  - VERSION=1.1.54385
+#  - VERSION=1.1.54383
 #  - VERSION=1.1.54381
 #  - VERSION=1.1.54380
 #  - VERSION=1.1.54378 client's image miss tzdata package: https://github.com/yandex/ClickHouse/commit/1bf49fe8446c7dea95beaef2b131e6c6708b0b62#diff-cc737435a5ba74620a889b7718f39a80
@@ -34,14 +35,14 @@ env:
 language: python
 python:
   - "2.7"
-  - "3.4"
-  - "3.5"
+#  - "3.4"
+#  - "3.5"
   - "3.6"
-  - "3.7"
-  - "3.8"
-  - "3.9-dev"
-  - "pypy2.7-5.10.0"
-  - "pypy3.5"
+#  - "3.7"
+#  - "3.8"
+#  - "3.9-dev"
+#  - "pypy2.7-5.10.0"
+#  - "pypy3.5"
 cache: pip
 services:
   - docker

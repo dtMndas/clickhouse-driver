@@ -6,7 +6,7 @@
         "depends": [],
         "name": "clickhouse_driver.bufferedreader",
         "sources": [
-            "/home/klebedev/work/clickhouse-driver/clickhouse_driver/bufferedreader.pyx"
+            "clickhouse_driver/bufferedreader.pyx"
         ]
     },
     "module_name": "clickhouse_driver.bufferedreader"
@@ -22,7 +22,7 @@ END: Cython Metadata */
 #else
 #define CYTHON_ABI "0_29_21"
 #define CYTHON_HEX_VERSION 0x001D15F0
-#define CYTHON_FUTURE_DIVISION 0
+#define CYTHON_FUTURE_DIVISION 1
 #include <stddef.h>
 #ifndef offsetof
   #define offsetof(type, member) ( (size_t) & ((type*)0) -> member )
@@ -1474,7 +1474,7 @@ static PyObject *__pyx_kp_s_Incompatible_checksums_s_vs_0xef;
 static PyObject *__pyx_n_s_MemoryError;
 static PyObject *__pyx_n_s_NotImplementedError;
 static PyObject *__pyx_n_s_PickleError;
-static PyObject *__pyx_kp_s_Unexpected_EOF_while_reading_byt;
+static PyObject *__pyx_kp_u_Unexpected_EOF_while_reading_byt;
 static PyObject *__pyx_n_s_UnicodeDecodeError;
 static PyObject *__pyx_n_s_bufsize;
 static PyObject *__pyx_n_s_clickhouse_driver_bufferedreader;
@@ -1513,7 +1513,7 @@ static PyObject *__pyx_kp_s_stringsource;
 static PyObject *__pyx_n_s_super;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_update;
-static PyObject *__pyx_kp_s_utf_8;
+static PyObject *__pyx_kp_u_utf_8;
 static int __pyx_pf_17clickhouse_driver_14bufferedreader_14BufferedReader___init__(struct __pyx_obj_17clickhouse_driver_14bufferedreader_BufferedReader *__pyx_v_self, PyObject *__pyx_v_bufsize); /* proto */
 static PyObject *__pyx_pf_17clickhouse_driver_14bufferedreader_14BufferedReader_2read_into_buffer(CYTHON_UNUSED struct __pyx_obj_17clickhouse_driver_14bufferedreader_BufferedReader *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_17clickhouse_driver_14bufferedreader_14BufferedReader_4read(struct __pyx_obj_17clickhouse_driver_14bufferedreader_BufferedReader *__pyx_v_self, unsigned PY_LONG_LONG __pyx_v_unread); /* proto */
@@ -2419,7 +2419,7 @@ static PyObject *__pyx_pf_17clickhouse_driver_14bufferedreader_14BufferedReader_
         __Pyx_DECREF_SET(__pyx_t_3, function);
       }
     }
-    __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_kp_s_utf_8) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_kp_s_utf_8);
+    __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_kp_u_utf_8) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_kp_u_utf_8);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -5146,7 +5146,7 @@ static PyObject *__pyx_pf_17clickhouse_driver_14bufferedreader___pyx_unpickle_Bu
     __Pyx_INCREF(__pyx_n_s_PickleError);
     __Pyx_GIVEREF(__pyx_n_s_PickleError);
     PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_PickleError);
-    __pyx_t_3 = __Pyx_Import(__pyx_n_s_pickle, __pyx_t_2, -1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_Import(__pyx_n_s_pickle, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 5, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_PickleError); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 5, __pyx_L1_error)
@@ -5563,7 +5563,7 @@ static PyObject *__pyx_pf_17clickhouse_driver_14bufferedreader_2__pyx_unpickle_B
     __Pyx_INCREF(__pyx_n_s_PickleError);
     __Pyx_GIVEREF(__pyx_n_s_PickleError);
     PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_PickleError);
-    __pyx_t_3 = __Pyx_Import(__pyx_n_s_pickle, __pyx_t_2, -1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_Import(__pyx_n_s_pickle, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 5, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_PickleError); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 5, __pyx_L1_error)
@@ -5991,7 +5991,7 @@ static PyObject *__pyx_pf_17clickhouse_driver_14bufferedreader_4__pyx_unpickle_C
     __Pyx_INCREF(__pyx_n_s_PickleError);
     __Pyx_GIVEREF(__pyx_n_s_PickleError);
     PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_PickleError);
-    __pyx_t_3 = __Pyx_Import(__pyx_n_s_pickle, __pyx_t_2, -1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 5, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_Import(__pyx_n_s_pickle, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 5, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_PickleError); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 5, __pyx_L1_error)
@@ -6749,7 +6749,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
   {&__pyx_n_s_NotImplementedError, __pyx_k_NotImplementedError, sizeof(__pyx_k_NotImplementedError), 0, 0, 1, 1},
   {&__pyx_n_s_PickleError, __pyx_k_PickleError, sizeof(__pyx_k_PickleError), 0, 0, 1, 1},
-  {&__pyx_kp_s_Unexpected_EOF_while_reading_byt, __pyx_k_Unexpected_EOF_while_reading_byt, sizeof(__pyx_k_Unexpected_EOF_while_reading_byt), 0, 0, 1, 0},
+  {&__pyx_kp_u_Unexpected_EOF_while_reading_byt, __pyx_k_Unexpected_EOF_while_reading_byt, sizeof(__pyx_k_Unexpected_EOF_while_reading_byt), 0, 1, 0, 0},
   {&__pyx_n_s_UnicodeDecodeError, __pyx_k_UnicodeDecodeError, sizeof(__pyx_k_UnicodeDecodeError), 0, 0, 1, 1},
   {&__pyx_n_s_bufsize, __pyx_k_bufsize, sizeof(__pyx_k_bufsize), 0, 0, 1, 1},
   {&__pyx_n_s_clickhouse_driver_bufferedreader, __pyx_k_clickhouse_driver_bufferedreader, sizeof(__pyx_k_clickhouse_driver_bufferedreader), 0, 0, 1, 1},
@@ -6788,7 +6788,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_super, __pyx_k_super, sizeof(__pyx_k_super), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_update, __pyx_k_update, sizeof(__pyx_k_update), 0, 0, 1, 1},
-  {&__pyx_kp_s_utf_8, __pyx_k_utf_8, sizeof(__pyx_k_utf_8), 0, 0, 1, 0},
+  {&__pyx_kp_u_utf_8, __pyx_k_utf_8, sizeof(__pyx_k_utf_8), 0, 1, 0, 0},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
@@ -6815,7 +6815,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Unexpected_EOF_while_reading_byt); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 191, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_u_Unexpected_EOF_while_reading_byt); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 191, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 

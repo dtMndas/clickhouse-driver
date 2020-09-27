@@ -1,23 +1,13 @@
-from .blockstreamprofileinfo import BlockStreamProfileInfo
-from .progress import Progress
+import numpy as np
+
+from ..progress import Progress
+from ..result import QueryResult
 
 
-class QueryResult(object):
+class NumPyQueryResult(QueryResult):
     """
-    Stores query result from multiple blocks.
+    Stores query result from multiple blocks as numpy arrays.
     """
-
-    def __init__(
-            self, packet_generator,
-            with_column_types=False, columnar=False):
-        self.packet_generator = packet_generator
-        self.with_column_types = with_column_types
-
-        self.data = []
-        self.columns_with_types = []
-        self.columnar = columnar
-
-        super(QueryResult, self).__init__()
 
     def store(self, packet):
         block = getattr(packet, 'block', None)
@@ -27,15 +17,7 @@ class QueryResult(object):
         # Header block contains no rows. Pick columns from it.
         if block.num_rows:
             if self.columnar:
-                columns = block.get_columns()
-                if self.data:
-                    # Extend corresponding column.
-                    for i, column in enumerate(columns):
-                        self.data[i].extend(column)
-                else:
-                    # Cast tuples to lists for further extending.
-                    # Concatenating tuples produce new tuple. It's slow.
-                    self.data = [list(c) for c in columns]
+                self.data.append(block.get_columns())
             else:
                 self.data.extend(block.get_rows())
 
@@ -50,9 +32,20 @@ class QueryResult(object):
         for packet in self.packet_generator:
             self.store(packet)
 
-        data = self.data
         if self.columnar:
-            data = [tuple(c) for c in self.data]
+            data = []
+            # Transpose to a list of columns, each column is list of chunks
+            for column_chunks in zip(*self.data):
+                # Concatenate chunks for each column
+                # if isinstance(chunks[0], np.ndarray):
+                column = np.concatenate(column_chunks)
+                # elif isinstance(chunks[0], pd.Categorical):
+                #     column = union_categoricals(chunks)
+                # else:
+                #     column = tuple(itertools.chain.from_iterable(chunks))
+                data.append(column)
+        else:
+            data = self.data
 
         if self.with_column_types:
             return data, self.columns_with_types
@@ -60,7 +53,7 @@ class QueryResult(object):
             return data
 
 
-class ProgressQueryResult(QueryResult):
+class NumPyProgressQueryResult(NumPyQueryResult):
     """
     Stores query result and progress information from multiple blocks.
     Provides iteration over query progress.
@@ -68,7 +61,8 @@ class ProgressQueryResult(QueryResult):
 
     def __init__(self, *args, **kwargs):
         self.progress_totals = Progress()
-        super(ProgressQueryResult, self).__init__(*args, **kwargs)
+
+        super(NumPyProgressQueryResult, self).__init__(*args, **kwargs)
 
     def __iter__(self):
         return self
@@ -93,10 +87,10 @@ class ProgressQueryResult(QueryResult):
         for _ in self:
             pass
 
-        return super(ProgressQueryResult, self).get_result()
+        return super(NumPyProgressQueryResult, self).get_result()
 
 
-class IterQueryResult(object):
+class NumPyIterQueryResult(object):
     """
     Provides iteration over returned data by chunks (streaming by chunks).
     """
@@ -108,7 +102,7 @@ class IterQueryResult(object):
         self.with_column_types = with_column_types
 
         self.first_block = True
-        super(IterQueryResult, self).__init__()
+        super(NumPyIterQueryResult, self).__init__()
 
     def __iter__(self):
         return self
@@ -129,22 +123,3 @@ class IterQueryResult(object):
 
     # For Python 3.
     __next__ = next
-
-
-class QueryInfo(object):
-    def __init__(self):
-        self.profile_info = BlockStreamProfileInfo()
-        self.progress = Progress()
-        self.elapsed = 0
-
-    def store_profile(self, profile_info):
-        self.profile_info = profile_info
-
-    def store_progress(self, progress):
-        if self.progress:
-            self.progress.increment(progress)
-        else:
-            self.progress = progress
-
-    def store_elapsed(self, elapsed):
-        self.elapsed = elapsed

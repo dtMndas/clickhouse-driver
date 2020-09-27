@@ -76,6 +76,15 @@ Install LZ4 and ZSTD requirements:
 
        pip install clickhouse-driver[lz4,zstd]
 
+NumPy support
+-------------
+
+You can install NumPy packageif you need NumPy support:
+
+    .. code-block:: bash
+
+       pip install clickhouse-driver[numpy]
+
 
 Installation from github
 ------------------------

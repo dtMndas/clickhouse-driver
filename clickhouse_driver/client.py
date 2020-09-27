@@ -33,12 +33,15 @@ class Client(object):
 
         * strings_encoding -- specifies string encoding. UTF-8 by default.
 
+        * use_numpy -- Use numpy for columns reading.
+
     """
 
     available_client_settings = (
         'insert_block_size',  # TODO: rename to max_insert_block_size
         'strings_as_bytes',
-        'strings_encoding'
+        'strings_encoding',
+        'use_numpy'
     )
 
     def __init__(self, *args, **kwargs):
@@ -53,8 +56,29 @@ class Client(object):
             ),
             'strings_encoding': self.settings.pop(
                 'strings_encoding', defines.STRINGS_ENCODING
+            ),
+            'use_numpy': self.settings.pop(
+                'use_numpy', False
             )
         }
+
+        if self.client_settings['use_numpy']:
+            try:
+                from .numpy.result import (
+                    NumPyIterQueryResult, NumPyProgressQueryResult,
+                    NumPyQueryResult
+                )
+                self.query_result_cls = NumPyQueryResult
+                self.iter_query_result_cls = NumPyIterQueryResult
+                self.progress_query_result_cls = NumPyProgressQueryResult
+            except ImportError:
+                # TODO: remove raise
+                raise
+                raise RuntimeError('Package numpy must be installed')
+        else:
+            self.query_result_cls = QueryResult
+            self.iter_query_result_cls = IterQueryResult
+            self.progress_query_result_cls = ProgressQueryResult
 
         self.connection = Connection(*args, **kwargs)
         self.connection.context.settings = self.settings
@@ -78,12 +102,12 @@ class Client(object):
         gen = self.packet_generator()
 
         if progress:
-            return ProgressQueryResult(
+            return self.progress_query_result_cls(
                 gen, with_column_types=with_column_types, columnar=columnar
             )
 
         else:
-            result = QueryResult(
+            result = self.query_result_cls(
                 gen, with_column_types=with_column_types, columnar=columnar
             )
             return result.get_result()
@@ -91,7 +115,11 @@ class Client(object):
     def iter_receive_result(self, with_column_types=False):
         gen = self.packet_generator()
 
-        for rows in IterQueryResult(gen, with_column_types=with_column_types):
+        result = self.iter_query_result_cls(
+            gen, with_column_types=with_column_types
+        )
+
+        for rows in result:
             for row in rows:
                 yield row
 
@@ -485,6 +513,9 @@ class Client(object):
                     kwargs[name] = asbool(value)
 
             elif name == 'secure':
+                kwargs[name] = asbool(value)
+
+            elif name == 'use_numpy':
                 kwargs[name] = asbool(value)
 
             elif name == 'client_name':

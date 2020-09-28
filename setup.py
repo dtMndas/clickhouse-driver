@@ -70,8 +70,8 @@ tests_require = [
     'clickhouse-cityhash>=1.0.2.1'
 ]
 
-if USE_NUMPY:
-    tests_require.append('numpy')
+# if USE_NUMPY:
+#     tests_require.append('numpy')
 
 setup(
     name='clickhouse-driver',

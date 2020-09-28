@@ -8,5 +8,5 @@ class NumPyBaseTestCase(BaseTestCase):
         try:
             super(NumPyBaseTestCase, self).setUp()
         except ImportError as e:
-            if e.name == 'numpy':
+            if 'numpy' in str(e):
                 self.skipTest('NumPy package is not installed')

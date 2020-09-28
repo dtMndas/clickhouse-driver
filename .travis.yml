@@ -43,7 +43,7 @@ python:
 #  - "3.9-dev"
 #  - "pypy2.7-5.10.0"
 #  - "pypy3.5"
-cache: pip
+#cache: pip
 services:
   - docker
 install:
@@ -60,6 +60,7 @@ install:
   - pip install --upgrade pip setuptools
   - pip install flake8 flake8-print coveralls cython
 script:
+  - if [ -z ${USE_NUMPY+x} ]; then pip uninstall -y numpy; fi
   - flake8 && coverage run --source=clickhouse_driver setup.py test
 after_success:
   coveralls
